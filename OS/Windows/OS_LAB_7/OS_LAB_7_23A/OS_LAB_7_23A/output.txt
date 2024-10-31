@@ -1,0 +1,60 @@
+Memory load: 87
+Physical memory: 1077137408
+Virtual memory: 2128105472
+Page File: -1714679808
+Time: 5224953
+
+Memory load: 86
+Physical memory: 1129713664
+Virtual memory: 2128105472
+Page File: -1748373504
+Time: 5225453
+
+Memory load: 86
+Physical memory: 1153527808
+Virtual memory: 2128105472
+Page File: -1792937984
+Time: 5225953
+
+Memory load: 87
+Physical memory: 1085931520
+Virtual memory: 2128105472
+Page File: -1854140416
+Time: 5226453
+
+Memory load: 87
+Physical memory: 1074372608
+Virtual memory: 2128105472
+Page File: -1868967936
+Time: 5226953
+
+Memory load: 87
+Physical memory: 1077055488
+Virtual memory: 2128105472
+Page File: -1881223168
+Time: 5227453
+
+Memory load: 87
+Physical memory: 1060495360
+Virtual memory: 2128105472
+Page File: -1889476608
+Time: 5227953
+
+Memory load: 87
+Physical memory: 1056034816
+Virtual memory: 2128097280
+Page File: -1901936640
+Time: 5228453
+
+Memory load: 87
+Physical memory: 1057968128
+Virtual memory: 2128097280
+Page File: -1906040832
+Time: 5228953
+
+Memory load: 87
+Physical memory: 1050308608
+Virtual memory: 2128097280
+Page File: -1909960704
+Time: 5229453
+

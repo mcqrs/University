@@ -1,0 +1,50 @@
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+depth 0: Claim reached state 7 (line 309)
+depth 0: Claim reached state 7 (line 310)
+depth 471: Claim reached state 11 (line 315)
+depth 637: Claim reached state 11 (line 314)
+pan: acceptance cycle (at depth 653)
+pan: wrote pan_in.trail
+(Spin Version 4.3.0 -- 22 June 2007)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness enabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 136 byte, depth reached 1044, errors: 1
+    3699 states, stored (29853 visited)
+   28820 states, matched
+   58673 transitions (= visited+matched)
+   14711 atomic steps
+hash conflicts: 0 (resolved)
+
+Stats on memory usage (in Megabytes):
+0.547 	equivalent memory usage for states (stored*(State-vector + overhead))
+0.788 	actual memory usage for states (unsuccessful compression: 143.94%)
+	State-vector as stored = 201 byte + 12 byte overhead
+33.554	memory used for hash table (-w23)
+32.000	memory used for DFS stack (-m1000000)
+0.071 	memory lost to fragmentation
+66.271	total actual memory usage
+
+unreached in proctype reader
+	line 114, "pan.___", state 96, "(!(lock))"
+	line 250, "pan.___", state 115, "-end-"
+	(2 of 115 states)
+unreached in proctype writer
+	line 38, "pan.___", state 50, "num = 0"
+	line 38, "pan.___", state 66, "num = 0"
+	line 268, "pan.___", state 134, "-end-"
+	(3 of 134 states)
+unreached in proctype :init:
+	line 56, "pan.___", state 4, "RW.readers = 0"
+	(1 of 24 states)
+unreached in proctype :never:
+	line 318, "pan.___", state 15, "(!(critR[0]))"
+	line 321, "pan.___", state 17, "-end-"
+	(2 of 17 states)

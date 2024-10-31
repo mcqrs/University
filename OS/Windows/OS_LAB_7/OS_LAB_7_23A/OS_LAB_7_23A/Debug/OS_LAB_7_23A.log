@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\muhin\source\repos\OS_LAB_7_23A\OS_LAB_7_23A\main.cpp(49,15): warning C4477: "sscanf": в строке форматирования "%ld" требуется аргумент типа "long *", но вариативный аргумент "1" имеет тип "LPVOID *"
+  OS_LAB_7_23A.vcxproj -> C:\Users\muhin\source\repos\OS_LAB_7_23A\Debug\OS_LAB_7_23A.exe

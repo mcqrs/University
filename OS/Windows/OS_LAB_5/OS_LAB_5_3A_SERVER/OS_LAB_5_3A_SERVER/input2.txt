@@ -1,0 +1,2 @@
+This is input file 2! Hello World!
+Hello World!

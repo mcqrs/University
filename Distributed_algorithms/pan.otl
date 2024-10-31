@@ -1,0 +1,85 @@
+#define w0 wantR[0]
+#define c0 critR[0]
+#define w1 wantR[1]	
+#define c1 critR[1]
+
+	/*
+	 * Formula As Typed: [](w0 -> <>c0) && [](w1 -> <>c1)
+	 * The Never Claim Below Corresponds
+	 * To The Negated Formula !([](w0 -> <>c0) && [](w1 -> <>c1))
+	 * (formalizing violations of the original)
+	 */
+
+never {    /* !([](w0 -> <>c0) && [](w1 -> <>c1)) */
+T0_init:
+	if
+	:: (! ((c1)) && (w1)) -> goto accept_S5
+	:: (! ((c0)) && (w0)) -> goto accept_S10
+	:: (1) -> goto T0_init
+	fi;
+accept_S5:
+	if
+	:: (! ((c1))) -> goto accept_S5
+	fi;
+accept_S10:
+	if
+	:: (! ((c0))) -> goto accept_S10
+	fi;
+}
+
+#ifdef NOTES
+Use Load to open a file or a template.
+#endif
+#ifdef RESULT
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+depth 0: Claim reached state 7 (line 309)
+depth 0: Claim reached state 7 (line 310)
+depth 26: Claim reached state 11 (line 315)
+depth 99: Claim reached state 11 (line 314)
+depth 149: Claim reached state 15 (line 319)
+depth 251: Claim reached state 15 (line 318)
+Depth=   18061 States=  1e+006 Transitions= 2.35532e+006 Memory= 83.270
+Depth=   58208 States=  2e+006 Transitions= 4.8575e+006 Memory= 107.846
+Depth=   78058 States=  3e+006 Transitions= 7.45081e+006 Memory= 158.636
+Depth=   78058 States=  4e+006 Transitions= 9.96379e+006 Memory= 218.950
+Depth=   78058 States=  5e+006 Transitions= 1.22722e+007 Memory= 258.067
+Depth=   78058 States=  6e+006 Transitions= 1.47095e+007 Memory= 292.678
+(Spin Version 4.3.0 -- 22 June 2007)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness enabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 136 byte, depth reached 78058, errors: 0
+1.74742e+006 states, stored (6.38309e+006 visited)
+9.38722e+006 states, matched
+1.57703e+007 transitions (= visited+matched)
+6.02456e+006 atomic steps
+hash conflicts: 665018 (resolved)
+
+Stats on memory usage (in Megabytes):
+258.619	equivalent memory usage for states (stored*(State-vector + overhead))
+245.261	actual memory usage for states (compression: 94.84%)
+	State-vector as stored = 128 byte + 12 byte overhead
+33.554	memory used for hash table (-w23)
+32.000	memory used for DFS stack (-m1000000)
+0.218 	memory lost to fragmentation
+310.598	total actual memory usage
+
+unreached in proctype reader
+	line 250, "pan.___", state 115, "-end-"
+	(1 of 115 states)
+unreached in proctype writer
+	line 268, "pan.___", state 134, "-end-"
+	(1 of 134 states)
+unreached in proctype :init:
+	(0 of 24 states)
+unreached in proctype :never:
+	line 321, "pan.___", state 17, "-end-"
+	(1 of 17 states)
+
+#endif

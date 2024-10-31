@@ -1,0 +1,7 @@
+﻿  pipeone.cpp
+C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\OS_LAB_5_2A_PIPE_ONE\pipeone.cpp(22,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\OS_LAB_5_2A_PIPE_ONE\pipeone.cpp(42,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "HANDLE"
+C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\OS_LAB_5_2A_PIPE_ONE\pipeone.cpp(42,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "HANDLE"
+C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\OS_LAB_5_2A_PIPE_ONE\pipeone.cpp(43,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "HANDLE"
+C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\OS_LAB_5_2A_PIPE_ONE\pipeone.cpp(43,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "HANDLE"
+  OS_LAB_5_2A_PIPE_ONE.vcxproj -> C:\Users\muhin\source\repos\OS_LAB_5_2A_PIPE_ONE\Debug\OS_LAB_5_2A_PIPE_ONE.exe

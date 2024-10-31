@@ -1,0 +1,115 @@
+package SIR_2 is
+  pragma MaxUID=5;
+
+  import SysLib;
+
+
+  parameter h: double := 0.10; -- %%UNLOADED=true
+
+  discrete h1: double := 0;
+
+  hybrid private class Track is
+    parameter tau: double := 100; -- %%UNLOADED=true
+    parameter betta: double := 3; -- %%UNLOADED=true
+    parameter v: double := 1; -- %%UNLOADED=true
+    parameter S0: double := 10/N; -- %%UNLOADED=true
+    parameter R0: double := 1/N; -- %%UNLOADED=true
+    parameter I0: double := 100/N; -- %%UNLOADED=true
+    parameter N: double := 111; -- %%UNLOADED=true
+    parameter sigma: double := betta/v; -- %%UNLOADED=true
+    parameter mu: double := 0.10; -- %%UNLOADED=true
+    I: double := h1;
+    Invar: double := 0;
+    Invar1: double := 0;
+    R: double := 0;
+    RF: double := 0;
+    S: double := 1-h1;
+    local continuous class COVID19 is
+      equations {
+        S' = -betta*I*S+mu-mu*S;
+        I' = betta*I*S-(v+mu)*I;
+        R' = v*I-mu*R;
+        Invar = S'+I'+R';
+        Invar1 = S+I+R;
+        RF = 1-S-I;
+        unknown S, I, R, Invar, Invar1, RF;
+      };
+    end COVID19;
+    bchart {
+      initial state _InitState;
+        pragma state(_InitState) rectangle Top=80,Left=20,Height=20,Width=20;
+        pragma state(_InitState) name point X=0,Y=0;
+        pragma state(_InitState) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+      state S1 do COVID19
+        entry actions {
+          R:=0;
+          I:=h1;
+          S:=1-h1;
+        }
+      ;
+        pragma state(S1) rectangle Top=70,Left=80,Height=40,Width=60;
+        pragma state(S1) name point X=0,Y=-15;
+        pragma state(S1) footnote rectangle Top=160,Left=90,Height=0,Width=0;
+      final state _FinalState;
+        pragma state(_FinalState) rectangle Top=80,Left=240,Height=20,Width=20;
+        pragma state(_FinalState) name point X=0,Y=0;
+        pragma state(_FinalState) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+      transition Tran_1 from _InitState to S1;
+        pragma transition(Tran_1) line [(70,90)];
+        pragma transition(Tran_1) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+        pragma transition (Tran_1) style polyline;
+      transition _T_1 |"1"| from S1 to _FinalState after tau;
+        pragma transition(_T_1) line [(150,90)];
+        pragma transition(_T_1) footnote rectangle Top=50,Left=160,Height=0,Width=0;
+        pragma transition (_T_1) style spline;
+    };
+  end Track;
+
+
+  hybrid class Model is
+    parameter N: double := 10; -- %%UNLOADED=true
+    i: double := 0;
+    bchart {
+      initial state _InitState;
+        pragma state(_InitState) rectangle Top=80,Left=20,Height=20,Width=20;
+        pragma state(_InitState) name point X=0,Y=0;
+        pragma state(_InitState) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+      state S1 do Track;
+        pragma state(S1) rectangle Top=70,Left=80,Height=40,Width=60;
+        pragma state(S1) name point X=0,Y=-15;
+        pragma state(S1) footnote rectangle Top=160,Left=100,Height=0,Width=0;
+      switch state _Switchpoint_2 |"2"|;
+        pragma state(_Switchpoint_2) rectangle Top=80,Left=230,Height=20,Width=20;
+        pragma state(_Switchpoint_2) name point X=0,Y=0;
+        pragma state(_Switchpoint_2) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+      final state _FinalState;
+        pragma state(_FinalState) rectangle Top=80,Left=340,Height=20,Width=20;
+        pragma state(_FinalState) name point X=0,Y=0;
+        pragma state(_FinalState) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+      transition Tran_1 from _InitState to S1;
+        pragma transition(Tran_1) line [(70,90)];
+        pragma transition(Tran_1) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+        pragma transition (Tran_1) style polyline;
+      transition _T_3 |"3"| from _Switchpoint_2 to _FinalState [else];
+        pragma transition(_T_3) line [(260,90)];
+        pragma transition(_T_3) footnote rectangle Top=130,Left=290,Height=0,Width=0;
+        pragma transition (_T_3) style spline;
+      transition _T_4 |"4"| from S1 to _Switchpoint_2;
+        pragma transition(_T_4) line [(150,90)];
+        pragma transition(_T_4) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+        pragma transition (_T_4) style spline;
+      transition _T_5 |"5"| from _Switchpoint_2 to S1 [i<N]
+        actions {
+          i:=i+1;
+          h1:=h1+h;
+        }
+      ;
+        pragma transition(_T_5) line [(240,20),(110,20)];
+        pragma transition(_T_5) footnote rectangle Top=0,Left=0,Height=0,Width=0;
+        pragma transition (_T_5) style polyline;
+    };
+  end Model;
+
+  static model: Model;
+
+end SIR_2;

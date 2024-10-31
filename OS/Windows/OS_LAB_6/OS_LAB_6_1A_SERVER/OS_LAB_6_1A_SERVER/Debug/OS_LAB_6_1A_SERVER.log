@@ -1,0 +1,3 @@
+﻿  server.cpp
+C:\Users\muhin\source\repos\OS_LAB_6_1A_SERVER\OS_LAB_6_1A_SERVER\server.cpp(19,7): warning C4101: versionRequested: неиспользованная локальная переменная
+  OS_LAB_6_1A_SERVER.vcxproj -> C:\Users\muhin\source\repos\OS_LAB_6_1A_SERVER\Debug\OS_LAB_6_1A_SERVER.exe

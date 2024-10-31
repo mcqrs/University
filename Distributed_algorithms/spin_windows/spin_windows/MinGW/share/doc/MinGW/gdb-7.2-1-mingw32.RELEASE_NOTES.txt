@@ -1,0 +1,50 @@
+gdb
+========================================================================
+GDB, the GNU Project debugger, allows you to see what is going on `inside'
+another program while it executes -- or what another program was doing at the
+moment it crashed.
+
+  http://www.gnu.org/software/gdb/
+
+Release:  gdb-7.2-1-mingw32
+
+Files:    gdb-7.2-1-mingw32-src.tar.lzma     (full source code)
+          gdb-7.2-1-mingw32-doc.tar.lzma     (documentation)
+          gdb-7.2-1-mingw32-bin.tar.lzma     (binary programs)
+
+Build requirements: gcc >= 3, gnu make, coreutils, sed, mktemp, python (optional)
+
+Runtime requirements: python (optional)
+
+Notes:    Two versions of the gdb binary are available in this release:
+
+          gdb           console
+          gdb-python27  console, with Python support
+
+          The python enabled gdb requires that you install the official Python
+          2.7 distribution available from:
+
+          http://python.org/download/
+
+          To build gdb with python support you need to copy libpython27.a to
+          libpython2.7.a and copy include files to include/python2.7:
+
+          cp /python/libs/libpython27.a /python/libs/libpython2.7.a
+          mkdir /python/include/python2.7
+          cp /python/include /python/include/python2.7
+          mkdir build
+          cd build
+          ../gdb-7.2/configure --host=mingw32 --target=mingw32 \
+            --build=mingw32 CFLAGS="-s -L/python/libs -I/python/include" \
+            --with-python
+
+Installation paths (relative to $prefix):
+
+          documentation:   share/gdb/, share/info/, share/man/
+          release notes:   share/doc/MinGW/
+          EXEs:            bin/
+
+
+Packaged for www.mingw.org by:
+Chris Sutcliffe <ir0nh34d@users.sourceforge.net>
+

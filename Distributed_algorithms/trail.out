@@ -1,0 +1,745 @@
+spin: warning, line  83 "pan_in", atomic inside atomic (ignored)
+spin: warning, line 110 "pan_in", atomic inside atomic (ignored)
+spin: line 257 "pan_in", redundant skip
+spin: warning, line  95 "pan_in", atomic inside atomic (ignored)
+spin: warning, line 110 "pan_in", atomic inside atomic (ignored)
+spin: warning, line 110 "pan_in", atomic inside atomic (ignored)
+Starting :init: with pid 0
+spin: warning, "pan_in", global, 'bit   wantR' variable is never used
+spin: warning, "pan_in", global, 'bit   wantW' variable is never used
+spin: warning, "pan_in", global, 'bit   critR' variable is never used
+spin: warning, "pan_in", global, 'bit   critW' variable is never used
+spin: warning, "pan_in", global, 'int   crR' variable is never used
+spin: warning, "pan_in", global, 'int   crW' variable is never used
+spin: couldn't find claim (ignored)
+  2:	proc  0 (:init:) line 273 "pan_in" (state 1)	[lock = 0]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+  3:	proc  0 (:init:) line  54 "pan_in" (state 2)	[RW.readers = 0]	<merge 11 now @3>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  3:	proc  0 (:init:) line  55 "pan_in" (state 3)	[RW.writers = 0]	<merge 11 now @5>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  3:	proc  0 (:init:) line 276 "pan_in" (state 5)	[i = 0]	<merge 11 now @11>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  4:	proc  0 (:init:) line 278 "pan_in" (state 6)	[((i<2))]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+Starting reader with pid 2
+  5:	proc  0 (:init:) line 279 "pan_in" (state 7)	[(run reader(i))]	<merge 0 now @8>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  5:	proc  0 (:init:) line 280 "pan_in" (state 8)	[i = (i+1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  6:	proc  0 (:init:) line 278 "pan_in" (state 6)	[((i<2))]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+Starting reader with pid 3
+  7:	proc  0 (:init:) line 279 "pan_in" (state 7)	[(run reader(i))]	<merge 0 now @8>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  7:	proc  0 (:init:) line 280 "pan_in" (state 8)	[i = (i+1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  8:	proc  0 (:init:) line 281 "pan_in" (state 9)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+  9:	proc  0 (:init:) line 283 "pan_in" (state 14)	[i = 0]	<merge 20 now @20>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 10:	proc  0 (:init:) line 285 "pan_in" (state 15)	[((i<1))]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+Starting writer with pid 4
+ 11:	proc  0 (:init:) line 286 "pan_in" (state 16)	[(run writer(i))]	<merge 0 now @17>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 11:	proc  0 (:init:) line 287 "pan_in" (state 17)	[i = (i+1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 12:	proc  0 (:init:) line 288 "pan_in" (state 18)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 13:	proc  0 (:init:) line 288 "pan_in" (state 19)	[goto :b9]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 14:	proc  0 (:init:) line 284 "pan_in" (state 22)	[break]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 16:	proc  3 (writer) line 256 "pan_in" (state 1)	[(1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 18:	proc  3 (writer) line  64 "pan_in" (state 8)	[(!(lock))]	<merge 0 now @9>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 18:	proc  3 (writer) line  65 "pan_in" (state 9)	[lock = 1]	<merge 13 now @10>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 1
+
+MSC: enterMon()
+ 18:	proc  3 (writer) line  66 "pan_in" (state 10)	[printf('MSC: enterMon()\\n')]	<merge 13 now @13>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 1
+
+ 20:	proc  3 (writer) line 175 "pan_in" (state 13)	[wantW = 1]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		wantW = 1
+
+MSC: startWrite
+ 22:	proc  3 (writer) line 176 "pan_in" (state 14)	[printf('MSC: startWrite\\n')]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 24:	proc  3 (writer) line 177 "pan_in" (state 15)	[waitW = (RW.OKtoWrite.waiting+RW.OKtoRead.waiting)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		waitW = 0
+
+ 26:	proc  3 (writer) line 181 "pan_in" (state 28)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 27:	proc  3 (writer) line 183 "pan_in" (state 30)	[.(goto)]	<merge 33 now @32>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+MSC: go write
+ 27:	proc  3 (writer) line 184 "pan_in" (state 32)	[printf('MSC: go write\\n')]	<merge 33 now @33>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 29:	proc  3 (writer) line 185 "pan_in" (state 33)	[RW.writers = (RW.writers+1)]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 31:	proc  3 (writer) line  24 "pan_in" (state 34)	[num = 0]
+		num = 0
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 32:	proc  3 (writer) line  26 "pan_in" (state 35)	[((num<2))]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 33:	proc  3 (writer) line  30 "pan_in" (state 38)	[else]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 34:	proc  3 (writer) line  32 "pan_in" (state 41)	[num = (num+1)]	<merge 45 now @45>
+		num = 1
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 35:	proc  3 (writer) line  26 "pan_in" (state 35)	[((num<2))]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 36:	proc  3 (writer) line  30 "pan_in" (state 38)	[else]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 37:	proc  3 (writer) line  32 "pan_in" (state 41)	[num = (num+1)]	<merge 45 now @45>
+		num = 2
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 38:	proc  3 (writer) line  33 "pan_in" (state 42)	[else]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+MSC: [array]--
+ 39:	proc  3 (writer) line  34 "pan_in" (state 43)	[printf('MSC: [array]--\\n')]	<merge 47 now @47>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 40:	proc  3 (writer) line  25 "pan_in" (state 47)	[break]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 42:	proc  3 (writer) line  24 "pan_in" (state 50)	[num = 0]
+		num = 0
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 43:	proc  3 (writer) line  26 "pan_in" (state 51)	[((num<1))]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 44:	proc  3 (writer) line  30 "pan_in" (state 54)	[else]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 45:	proc  3 (writer) line  32 "pan_in" (state 57)	[num = (num+1)]	<merge 61 now @61>
+		num = 1
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 46:	proc  3 (writer) line  33 "pan_in" (state 58)	[else]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+MSC: [array]--
+ 47:	proc  3 (writer) line  34 "pan_in" (state 59)	[printf('MSC: [array]--\\n')]	<merge 63 now @63>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 48:	proc  3 (writer) line  25 "pan_in" (state 63)	[break]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 50:	proc  3 (writer) line  74 "pan_in" (state 66)	[lock = 0]	<merge 72 now @67>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+MSC: leaveMon()
+ 50:	proc  3 (writer) line  75 "pan_in" (state 67)	[printf('MSC: leaveMon()\\n')]	<merge 72 now @71>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+MSC: ==CS== begin
+ 50:	proc  3 (writer) line 260 "pan_in" (state 71)	[printf('MSC: ==CS== begin\\n')]	<merge 72 now @72>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+ 52:	proc  3 (writer) line 261 "pan_in" (state 72)	[critW = 1]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		critW = 1
+
+ 54:	proc  3 (writer) line 262 "pan_in" (state 73)	[crW = (crW+1)]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		crW = 1
+
+ 56:	proc  3 (writer) line 263 "pan_in" (state 74)	[crW = (crW-1)]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		crW = 0
+
+ 58:	proc  3 (writer) line 264 "pan_in" (state 75)	[critW = 0]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		critW = 0
+
+MSC: ==CS== end
+ 60:	proc  3 (writer) line 265 "pan_in" (state 76)	[printf('MSC: ==CS== end\\n')]
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 62:	proc  3 (writer) line  64 "pan_in" (state 77)	[(!(lock))]	<merge 0 now @78>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 62:	proc  3 (writer) line  65 "pan_in" (state 78)	[lock = 1]	<merge 83 now @79>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 1
+
+MSC: enterMon()
+ 62:	proc  3 (writer) line  66 "pan_in" (state 79)	[printf('MSC: enterMon()\\n')]	<merge 83 now @82>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 1
+
+MSC: EndWrite
+ 62:	proc  3 (writer) line 207 "pan_in" (state 82)	[printf('MSC: EndWrite\\n')]	<merge 83 now @83>
+		RW.readers = 0
+		RW.writers = 1
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 1
+
+ 64:	proc  3 (writer) line 208 "pan_in" (state 83)	[RW.writers = (RW.writers-1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 66:	proc  3 (writer) line 211 "pan_in" (state 84)	[countZeros = 0]	<merge 98 now @85>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 66:	proc  3 (writer) line 213 "pan_in" (state 85)	[t = 0]	<merge 98 now @98>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 68:	proc  3 (writer) line 216 "pan_in" (state 86)	[((t<2))]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 69:	proc  3 (writer) line 219 "pan_in" (state 87)	[((waitR[t]==0))]	<merge 0 now @88>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 69:	proc  3 (writer) line 219 "pan_in" (state 88)	[countZeros = (countZeros+1)]	<merge 95 now @92>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 69:	proc  3 (writer) line 222 "pan_in" (state 92)	[t = (t+1)]	<merge 95 now @95>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 70:	proc  3 (writer) line 216 "pan_in" (state 86)	[((t<2))]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 71:	proc  3 (writer) line 219 "pan_in" (state 87)	[((waitR[t]==0))]	<merge 0 now @88>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 71:	proc  3 (writer) line 219 "pan_in" (state 88)	[countZeros = (countZeros+1)]	<merge 95 now @92>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 71:	proc  3 (writer) line 222 "pan_in" (state 92)	[t = (t+1)]	<merge 95 now @95>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 72:	proc  3 (writer) line 223 "pan_in" (state 93)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 73:	proc  3 (writer) line 223 "pan_in" (state 94)	[goto :b7]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 74:	proc  3 (writer) line 215 "pan_in" (state 97)	[break]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+MSC: 2 > 2 - 0 
+ 76:	proc  3 (writer) line 227 "pan_in" (state 99)	[printf('MSC: %d > %d - %d \\n',countZeros,2,RW.OKtoRead.waiting)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 78:	proc  3 (writer) line 231 "pan_in" (state 111)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+MSC: signal(OKtoWrite)
+ 79:	proc  3 (writer) line 231 "pan_in" (state 112)	[printf('MSC: signal(OKtoWrite)\\n')]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 80:	proc  3 (writer) line 116 "pan_in" (state 117)	[else]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 81:	proc  3 (writer) line 118 "pan_in" (state 119)	[.(goto)]	<merge 128 now @128>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 83:	proc  3 (writer) line  74 "pan_in" (state 125)	[lock = 0]	<merge 129 now @126>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+MSC: leaveMon()
+ 83:	proc  3 (writer) line  75 "pan_in" (state 126)	[printf('MSC: leaveMon()\\n')]	<merge 129 now @129>
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+
+ 85:	proc  3 (writer) line 235 "pan_in" (state 129)	[wantW = 0]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		wantW = 0
+
+ 87:	proc  3 (writer) line 257 "pan_in" (state 3)	[(1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+<<<<<START OF CYCLE>>>>>
+ 89:	proc  3 (writer) line 257 "pan_in" (state 4)	[(1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+ 91:	proc  3 (writer) line 257 "pan_in" (state 3)	[(1)]
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+
+spin: trail ends after 91 steps
+#processes: 4
+		num = 1
+		RW.readers = 0
+		RW.writers = 0
+		RW.OKtoRead.gate = 0
+		RW.OKtoRead.waiting = 0
+		RW.OKtoWrite.gate = 0
+		RW.OKtoWrite.waiting = 0
+		lock = 0
+		wantR[0] = 0
+		wantR[1] = 0
+		wantW = 0
+		critR[0] = 0
+		critR[1] = 0
+		critW = 0
+		waitR[0] = 0
+		waitR[1] = 0
+		waitW = 0
+		crR = 0
+		crW = 0
+ 91:	proc  3 (writer) line 257 "pan_in" (state 4)
+ 91:	proc  2 (reader) line 239 "pan_in" (state 112)
+ 91:	proc  1 (reader) line 239 "pan_in" (state 112)
+ 91:	proc  0 (:init:) line 292 "pan_in" (state 24)
+4 processes created
+Exit-Status 0

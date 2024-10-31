@@ -1,0 +1,378 @@
+#define nWriters 2      /*количество процессов-писателей*/
+#define nReaders 2      /*количество процессов-читателей*/
+
+//LTL formuls
+
+/*Инвариант. Если читатель читает, то никто не пишет. Не более одного писателя в критической секции. Если писатель пишет, то никто не читает.   */
+#define mutex1 { []((crR >= 1 -> crW == 0) && (crW <= 1) && (crW == 1 -> crR == 0)) } 
+
+/*Проверка на взаимоисключающий доступ*/
+#define mutex2 {[]((RW.readers >= 1 -> RW.writers == 0) && (RW.writers <= 1) && (RW.writers == 1 -> RW.readers == 0))}
+
+/*Проверка свободы от голодания для читателей*/
+#define starvR {[](wantR[0] -> <>critR[0]) && [](wantR[1] -> <>critR[1]) && [](wantR[2] -> <>critR[2])}
+
+/*Проверка свободы от голодания для писателей*/
+#define starvW {[](wantW[0] -> <>critW[0]) && [](wantW[1] -> <>critW[1]) && [](wantW[2] -> <>critW[2])}
+
+
+#define emptyC(C) (C.waiting == 0)
+
+int num;
+inline decrementArray(ArrayName, max){
+    atomic{
+    num = 0;
+    do
+        :: num < max -> 
+            /*printf("MSC: num=%d\n", num);*/ 
+            if
+            :: ArrayName[num] > 0 -> ArrayName[num]--;
+            :: else;
+            fi;
+            num++;
+        :: else -> 
+            printf("MSC: [array]--\n");
+            break;
+    od
+    }
+}
+
+typedef Condition {
+    bool gate;
+    int waiting;
+}
+
+typedef Monitor {
+    int readers;    /*количество читателей в критической секции */
+    int writers;    /*количество писателей в критической секции */
+    Condition OKtoRead;     /*условная переменная для блокировки читателей до тех пор пока не будет "можно читать" */
+    Condition OKtoWrite;    /*условная переменная для блокировки писателей до тех пор пока не будет "можно писать" */
+}
+
+
+inline initMon(M, r, w) {
+    M.readers = r;
+    M.writers = w;
+}
+
+/*Вызов функции enterMon() позволяет процессу убедиться, что он может походить, 
+сразу же снять это право у других процессов, благодаря флагу блокировки lock. 
+Благодаря этой функции мы уверены, что никакой другой процесс не будет сейчас 
+делать ход.  */
+inline enterMon(){
+atomic{
+    !lock;
+    lock = true;
+    printf("MSC: enterMon()\n");
+}
+}
+
+/*После того, как функция завершилась, флаг lock снимается, что позволяет 
+другим процессам запускать свои функции. */
+inline leaveMon(){
+atomic{
+    lock = false;
+    printf("MSC: leaveMon()\n");
+}
+}
+
+
+/*В функции waitC(С) мы блокируем процесс, добавляя его в очередь(канал) командой C.waiting++, 
+совобождаем монитор и затем ждем разблокировки процесса. */
+inline wait_OKtoRead(i){
+atomic {
+    RW.OKtoRead.waiting++;
+    lock = false;
+    !waitR[i]; /**waitR[i]==0 */
+    printf("MSC: my turn! wait for gate\n");
+    RW.OKtoRead.gate;
+    RW.OKtoRead.gate = false;
+    RW.OKtoRead.waiting--;
+    printf("MSC: received gate\n");
+}
+}
+inline wait_OktoWrite(i){
+atomic {
+    RW.OKtoWrite.waiting++;
+    lock = false;
+    !waitW[i]; /**waitW[i]==0; */
+    printf("MSC: my turn! wait for gate\n");
+    RW.OKtoWrite.gate;
+    RW.OKtoWrite.gate = false;
+    RW.OKtoWrite.waiting--;
+    printf("MSC: received gate\n");
+}
+}
+
+/*В функции signalC(С) мы проверяем пуст ли канал. Если канал не пустой, 
+то разблокируем процесс и затем ждем возможность зайти в монитор. */
+inline signalC(C) {
+atomic {
+    if
+    ::(C.waiting > 0) ->
+        C.gate = true;
+        !lock;
+        lock = true;
+    ::else;
+    fi;
+}
+}
+
+
+Monitor RW;
+bool lock = false;
+bool wantR[nReaders], wantW[nWriters], critR[nReaders], critW[nWriters];
+int waitR[nReaders]; //количество ожидающих писателей перед i-тым читателем
+int waitW[nWriters]; //общее количество процессов перед i-тым писателем
+int crR = 0, crW = 0;
+
+
+inline StartRead() {
+    enterMon();
+    wantR[i] = true;
+    wantR[i] = false;
+    printf("MSC: startRead\n");
+    waitR[i] = RW.OKtoWrite.waiting;
+    atomic{
+        if
+        :: (RW.writers != 0 || !emptyC(RW.OKtoWrite)) -> printf("MSC: wait(OKtoRead)\n"); wait_OKtoRead(i);
+        ::else;
+        fi;
+    }
+    printf("MSC: go read\n");
+    RW.readers++;
+    
+    /**Сигнал получают только читатели у которых подошла очередь, т.е. waitR[i]==0 кроме нас*/
+    int cZeros;
+    cZeros = 0;
+    int p;
+    p = 0;
+    atomic{
+    do
+        :: p < nReaders ->
+            /*printf("MSC: p=%d\n", p); */
+            if
+            :: waitR[p] == 0 -> cZeros++;
+            :: else;
+            fi;
+            p++;
+        :: else -> break;
+    od;
+    printf("MSC: %d-(%d-%d) > 0?\n", cZeros, nReaders, RW.OKtoRead.waiting);
+    }
+    if
+    :: (cZeros - (nReaders - RW.OKtoRead.waiting) > 0) -> 
+        printf("MSC: signal(OKtoRead)\n");
+        signalC(RW.OKtoRead);
+    :: else;
+    fi;
+
+    decrementArray(waitW, nWriters);
+    leaveMon();
+}
+
+inline StartWrite() {
+    enterMon();
+    wantW[i] = true;
+    wantW[i] = false;
+    printf("MSC: startWrite\n");
+    waitW[i] = RW.OKtoWrite.waiting + RW.OKtoRead.waiting;
+    atomic{
+    if
+    :: (RW.writers != 0 || RW.readers != 0) -> printf("MSC: wait(OKtoWrite)\n"); wait_OktoWrite(i);
+    :: else;
+    fi;
+    }
+    printf("MSC: go write\n");
+    RW.writers++;
+    decrementArray(waitR, nReaders);
+    decrementArray(waitW, nWriters);
+    leaveMon();
+}
+
+inline EndRead() {
+    enterMon();
+    printf("MSC: EndRead\n");
+    RW.readers--;
+    atomic{
+    if
+    :: (RW.readers == 0) -> printf("MSC: signal(OKtoWrite)\n"); signalC(RW.OKtoWrite);
+    :: else;
+    fi;
+    }
+    leaveMon();
+}
+
+inline EndWrite() {
+    enterMon();
+    printf("MSC: EndWrite\n");
+    RW.writers--;
+
+    int countZeros;
+    countZeros = 0;
+    int t;
+    t = 0;
+    atomic{
+    do
+        :: t < nReaders ->
+            /*printf("MSC: t=%d\n", t); */
+            if
+            :: waitR[t] == 0 -> countZeros++;
+            :: else;
+            fi;
+            t++;
+        :: else -> break;
+    od;
+    }
+
+    printf("MSC: %d > %d - %d \n", countZeros, nReaders, RW.OKtoRead.waiting);
+    atomic{
+        if
+        :: (countZeros > nReaders - RW.OKtoRead.waiting) -> printf("MSC: signal(OKtoRead)\n"); signalC(RW.OKtoRead);
+        :: else ->  printf("MSC: signal(OKtoWrite)\n"); signalC(RW.OKtoWrite);
+        fi;
+    }
+    leaveMon();
+}
+
+proctype reader (int i){ 
+    do
+    ::
+    StartRead();
+    printf("MSC: ==CS== begin\n");
+    critR[i] = true;
+    crR++;
+    crR--;
+    critR[i] = false;
+    printf("MSC: ==CS== end\n");
+    EndRead();
+    od;
+}
+
+proctype writer (int i){
+do
+    ::
+  do
+::true->break
+::true->skip
+od;
+    StartWrite();
+    printf("MSC: ==CS== begin\n");
+    critW[i] = true;
+    crW++;
+    crW--;
+    critW[i] = false;
+    printf("MSC: ==CS== end\n");
+    EndWrite();
+od;
+}
+
+
+init {
+atomic {
+    lock = false;
+    initMon(RW, 0, 0);
+    int i;
+    i = 0;
+    do
+    :: i < nReaders ->
+            run reader(i);
+            i = i+1;
+    :: else -> break;
+    od;
+    i = 0;
+    do
+    :: i < nWriters ->
+            run writer(i);
+            i = i+1;
+    :: else -> break;
+    od;
+
+}
+}
+
+#define w0 wantR[0]
+#define c0 critR[0]
+#define w1 wantR[1]	
+#define c1 critR[1]
+
+	/*
+	 * Formula As Typed: [](w0 -> <>c0) && [](w1 -> <>c1)
+	 * The Never Claim Below Corresponds
+	 * To The Negated Formula !([](w0 -> <>c0) && [](w1 -> <>c1))
+	 * (formalizing violations of the original)
+	 */
+
+never {    /* !([](w0 -> <>c0) && [](w1 -> <>c1)) */
+T0_init:
+	if
+	:: (! ((c1)) && (w1)) -> goto accept_S5
+	:: (! ((c0)) && (w0)) -> goto accept_S10
+	:: (1) -> goto T0_init
+	fi;
+accept_S5:
+	if
+	:: (! ((c1))) -> goto accept_S5
+	fi;
+accept_S10:
+	if
+	:: (! ((c0))) -> goto accept_S10
+	fi;
+}
+
+#ifdef NOTES
+Use Load to open a file or a template.
+#endif
+#ifdef RESULT
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+depth 0: Claim reached state 7 (line 309)
+depth 0: Claim reached state 7 (line 310)
+depth 26: Claim reached state 11 (line 315)
+depth 99: Claim reached state 11 (line 314)
+depth 149: Claim reached state 15 (line 319)
+depth 251: Claim reached state 15 (line 318)
+Depth=   18061 States=  1e+006 Transitions= 2.35532e+006 Memory= 83.270
+Depth=   58208 States=  2e+006 Transitions= 4.8575e+006 Memory= 107.846
+Depth=   78058 States=  3e+006 Transitions= 7.45081e+006 Memory= 158.636
+Depth=   78058 States=  4e+006 Transitions= 9.96379e+006 Memory= 218.950
+Depth=   78058 States=  5e+006 Transitions= 1.22722e+007 Memory= 258.067
+Depth=   78058 States=  6e+006 Transitions= 1.47095e+007 Memory= 292.678
+(Spin Version 4.3.0 -- 22 June 2007)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness enabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 136 byte, depth reached 78058, errors: 0
+1.74742e+006 states, stored (6.38309e+006 visited)
+9.38722e+006 states, matched
+1.57703e+007 transitions (= visited+matched)
+6.02456e+006 atomic steps
+hash conflicts: 665018 (resolved)
+
+Stats on memory usage (in Megabytes):
+258.619	equivalent memory usage for states (stored*(State-vector + overhead))
+245.261	actual memory usage for states (compression: 94.84%)
+	State-vector as stored = 128 byte + 12 byte overhead
+33.554	memory used for hash table (-w23)
+32.000	memory used for DFS stack (-m1000000)
+0.218 	memory lost to fragmentation
+310.598	total actual memory usage
+
+unreached in proctype reader
+	line 250, "pan.___", state 115, "-end-"
+	(1 of 115 states)
+unreached in proctype writer
+	line 268, "pan.___", state 134, "-end-"
+	(1 of 134 states)
+unreached in proctype :init:
+	(0 of 24 states)
+unreached in proctype :never:
+	line 321, "pan.___", state 17, "-end-"
+	(1 of 17 states)
+
+#endif

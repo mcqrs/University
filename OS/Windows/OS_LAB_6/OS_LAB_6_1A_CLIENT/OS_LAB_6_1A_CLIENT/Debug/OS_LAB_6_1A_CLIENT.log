@@ -1,0 +1,3 @@
+﻿  client.cpp
+C:\Users\muhin\source\repos\OS_LAB_6_1A_CLIENT\OS_LAB_6_1A_CLIENT\client.cpp(18,7): warning C4101: versionRequested: неиспользованная локальная переменная
+  OS_LAB_6_1A_CLIENT.vcxproj -> C:\Users\muhin\source\repos\OS_LAB_6_1A_CLIENT\Debug\OS_LAB_6_1A_CLIENT.exe
